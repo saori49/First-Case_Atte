@@ -155,6 +155,17 @@ return [
             'confirmPassword' => true,
             // 'window' => 0,
         ]),
+        Features::emailVerification() => [
+        'enabled' => true,
+        'redirect' => '/dashboard',
+        ],
+    ],
+
+    'verification' => [
+        'enabled' => true,
+        'email' => 'custom.verify-email',
+        'table' => 'users',
+        'expire' => 60,
     ],
 
 ];

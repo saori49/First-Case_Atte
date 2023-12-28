@@ -17,15 +17,10 @@
   </header>
   <main class="main">
     <div class="main-container">
-      @if(session('success'))
-        <div class="alert alert-success">
-          {{ session('success') }}
-        </div>
-      @endif
 
-      @if(session('login_error'))
-        <div class="alert alert-danger">
-          {{session('login_error')}}
+    @if(session('register_success'))
+        <div class="alert alert-success">
+          {{session('register_success')}}
         </div>
       @endif
 
@@ -34,7 +29,15 @@
           {{session('logout')}}
         </div>
       @endif
+
       <h2 class="login-logo">ログイン</h2>
+
+      @if(session('login_error'))
+        <div class="alert alert-danger">
+          {{session('login_error')}}
+        </div>
+      @endif
+
       <form class="login" action="/login" method="post">
       @csrf
         <input type="email" name="email" value="{{ old('email') }}" placeholder="メールアドレス">
@@ -52,7 +55,7 @@
         </div>
         <button type="submit">ログイン</button>
       </form>
-      
+
       <p class="unregistered">アカウントをお持ちでない方はこちらから</p>
       <a href="{{ route('register') }}" class="registration-button">会員登録</a>
     </div>

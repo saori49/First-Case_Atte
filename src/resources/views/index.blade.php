@@ -13,15 +13,15 @@
       </div>
     @endif
 
-    @if(session('success'))
+    @if(session('punch_success'))
       <div class="alert alert-danger">
-        {{ session('success') }}
+        {{ session('punch_success') }}
       </div>
     @endif
 
-    @if(session('error'))
+    @if(session('punch_error'))
       <div class="alert alert-danger">
-        {{ session('error') }}
+        {{ session('punch_error') }}
       </div>
     @endif
 

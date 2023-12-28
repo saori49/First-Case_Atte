@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginFormRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Attendance;
 use Illuminate\Support\Facades\Session;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Auth\Events\Registered;
+use App\Http\Requests\LoginFormRequest;
+use App\Http\Requests\RegisterFormRequest;
+use App\Models\Attendance;
+use App\Models\User;
+use Carbon\Carbon;
+
 
 class AuthController extends Controller
 {
@@ -16,8 +21,6 @@ class AuthController extends Controller
     public function index()
     {
         return view('index');
-
-
     }
 
     //打刻処理
@@ -29,14 +32,14 @@ class AuthController extends Controller
             ->first();
 
         if ($existingRecord) {
-            Session::flash('error', '本日は既に勤務を開始しています。');
+            Session::flash('punch_error', '本日は既に勤務を開始しています。');
         } else {
             Attendance::create([
                 'user_id'    => auth()->user()->id,
                 'start_time' => now()->toTimeString(),
                 'date'       => now()->toDateString(),
             ]);
-            Session::flash('success', '勤務を開始しました。');
+            Session::flash('punch_success', '勤務を開始しました。');
         }
 
         return redirect()->back();
@@ -52,9 +55,9 @@ class AuthController extends Controller
             $record->update([
                 'end_time' => now()->toTimeString(),
                 ]);
-                Session::flash('success', '勤務を終了しました。');
+                Session::flash('punch_success', '勤務を終了しました。');
             } else {
-            Session::flash('error', '本日はまだ勤務を開始していません。');
+            Session::flash('punch_error', '本日はまだ勤務を開始していません。');
         }
 
         return redirect()->back();
@@ -68,7 +71,7 @@ class AuthController extends Controller
             'date'        => now()->toDateString(),
         ]);
 
-        Session::flash('success', '休憩を開始しました。');
+        Session::flash('punch_success', '休憩を開始しました。');
 
         return redirect()->back();
     }
@@ -85,9 +88,9 @@ class AuthController extends Controller
             $record->update([
                 'break_end' => now()->toTimeString(),
             ]);
-            Session::flash('success', '休憩を終了しました。');
+            Session::flash('punch_success', '休憩を終了しました。');
         } else {
-            Session::flash('error', '休憩を開始していません。');
+            Session::flash('punch_error', '休憩を開始していません。');
         }
 
         return redirect()->back();
@@ -106,16 +109,46 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             // 成功
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('login_success','ログイン成功しました');
         }
 
         // 失敗
         return back()->with('login_error' ,'メールアドレスかパスワードが間違っています。',);
     }
 
+    //logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login')->with('logout','ログアウトしました');
+    }
+
+//registerページ表示
+    public function create()
+    {
+        return view('auth.register');
+    }
+
+    //register処理
+    public function store(RegisterFormRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(route('login'))->with('register_success', '会員登録が完了しました。ログインしてください。');
+    }
 
 
-    //日付一覧ページ表示
+//日付一覧ページ処理
     public function manage()
     {
         $attendances = Attendance::Paginate(5);
