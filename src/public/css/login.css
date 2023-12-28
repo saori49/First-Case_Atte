@@ -1,0 +1,83 @@
+body {
+  max-width: 1230px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 30px;
+}
+
+.header-left h1 {
+  font-size: 24px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  min-height: 80vh;
+  background-color: gainsboro;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-logo {
+  font-size: 24px;
+  padding-top: 70px;
+  margin-bottom: 20px;
+}
+
+input,
+button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.error {
+  width: 100%;
+  font-size: 16px;
+  color: red;
+}
+
+button {
+  background-color: blue;
+  color: white;
+}
+
+.unregistered {
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+.registration-button {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bolder;
+  color: blue;
+  text-decoration: none;
+}
+
+.footer {
+  max-width: 1230px;
+  text-align: center;
+}
+
+.footer p {
+  font-size: larger;
+  font-weight: bold;
+}
+
+/* メディアクエリ スマートフォン */
+@media screen and (max-width: 480px) {
+  .unregistered {
+    font-size: 15px;
+  }
+}

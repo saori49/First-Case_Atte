@@ -1,0 +1,63 @@
+body {
+  max-width: 1230px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  min-height: 80vh;
+  background-color: gainsboro;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 30px;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.header-right form {
+  margin-left: 10px;
+}
+
+.header-right button {
+  border: none;
+  background: transparent;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.header-left h1 {
+  font-size: 24px;
+}
+
+.logout{
+  margin-bottom: 0;
+}
+
+.footer {
+  max-width: 1230px;
+  text-align: center;
+}
+
+.footer p {
+  font-size: larger;
+  font-weight: bold;
+}

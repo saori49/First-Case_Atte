@@ -1,0 +1,60 @@
+.main {
+  display: flex;
+  justify-content: center;
+  min-height: 80vh;
+  background-color: gainsboro;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.top-sentence {
+  margin-top: 50px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin-top: 50px;
+}
+
+.button-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button {
+  max-width: 80%;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 50px;
+  padding: 70px 130px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.button:disabled {
+  background-color: lightgrey;
+}
+
+/* メディアクエリ スマートフォン */
+@media screen and (max-width: 480px) {
+  .top-sentence {
+      font-size: smaller;
+    }
+  .button-inner {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+  }
+}
