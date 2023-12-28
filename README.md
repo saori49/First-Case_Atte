@@ -4,7 +4,8 @@
 
 勤怠管理システムを作成
 
-![home](https://github.com/saori49/First-Case_Atte/assets/142149934/a82a2499-10fb-48cc-99bd-b5c59292ab9e)
+![HOME](https://github.com/saori49/First-Case_Atte/assets/142149934/81807e53-525e-4442-ba2b-46fafed9f1c0)
+
 
 
 
