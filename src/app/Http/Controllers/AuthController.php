@@ -108,11 +108,9 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // 成功
             return redirect()->intended('/')->with('login_success','ログイン成功しました');
         }
 
-        // 失敗
         return back()->with('login_error' ,'メールアドレスかパスワードが間違っています。',);
     }
 

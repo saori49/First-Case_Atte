@@ -39,7 +39,7 @@ Route::post('/register', [AuthController::class, 'store'])->middleware(['guest']
 Route::get('/attendance', [AuthController::class, 'manage'])->name('manage');
 Route::post('/attendance',[AuthController::class,"showAttendance"])->name('showAttendance');
 
-
+//メール認証エラー解消できていない分
 Route::get('/email/verify', [AuthController::class, 'showVerificationNotice'])->name('verification.notice');
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
 Route::post('/email/verification-notification', [AuthController::class, 'sendVerificationEmail'])->name('verification.send');
